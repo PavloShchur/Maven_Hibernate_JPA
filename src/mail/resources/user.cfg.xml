@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="shchur_pavlo.Hibernate.User" table="user">
+
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+
+		<property name="firstName" column="firstName" type="string" />
+		<property name="lastName" column="lastName" type="string" />
+		<property name="age" column="age" type="int" />
+
+		<many-to-one name="role" class="shchur_pavlo.Hibernate.Role">
+			<column name="role_id" not-null="true"></column>
+		</many-to-one>
+
+		<one-to-one name="company" class="shchur_pavlo.Hibernate.Company" />
+
+		<set name="products" table="user_role">	
+			<key column="product_id"/>
+			<many-to-many column="user_id" class="shchur_pavlo.Hibernate.User" />
+		</set>
+
+	</class>
+</hibernate-mapping>
+ 

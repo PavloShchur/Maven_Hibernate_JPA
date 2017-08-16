@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+   <session-factory>
+   
+   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+   <property name="hibernate.connection.url">jdbc:mysql://localhost/hibernate?createDatabaseIfNotExist=true</property>
+   <property name="hibernate.connection.username">root</property>
+   <property name="hibernate.connection.password">auf253100vbnc45</property>
+   <property name="show_sql">true</property>
+   <property name="hibernate.hbm2ddl.auto">create</property>
+
+   <mapping resource="user.cfg.xml"/>
+   <mapping resource="role.cfg.xml"/>
+   <mapping resource="company.cfg.xml"/>
+   <mapping resource="product.cfg.xml"/>
+   
+   <mapping class="shchur_pavlo.Hibernate.Country" />
+   <mapping class="shchur_pavlo.Hibernate.Region" />
+   <mapping class="shchur_pavlo.Hibernate.City" />
+   <mapping class="shchur_pavlo.Hibernate.Council" />
+
+   </session-factory>
+
+</hibernate-configuration>
