@@ -23,6 +23,7 @@
    <mapping class="shchur_pavlo.Hibernate.Region" />
    <mapping class="shchur_pavlo.Hibernate.City" />
    <mapping class="shchur_pavlo.Hibernate.Council" />
+   <mapping class="shchur_pavlo.Hibernate.Policeman" />
 
    </session-factory>
 

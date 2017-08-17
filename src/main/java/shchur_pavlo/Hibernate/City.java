@@ -1,13 +1,20 @@
 package shchur_pavlo.Hibernate;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "city")
+@Getter
+@Setter
 public class City implements Serializable {
 
 	private static final long serialVersionUID = -4264271530358773255L;
@@ -25,6 +32,11 @@ public class City implements Serializable {
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="council_id")
 	private Council council;
+
+	@ManyToMany(mappedBy = "citySet")
+	private Set<Policeman> policemanSet = new HashSet<Policeman>();
+
+
 
 	public City() {
 		super();
