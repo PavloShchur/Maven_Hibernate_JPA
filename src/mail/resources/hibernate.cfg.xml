@@ -19,11 +19,14 @@
    <mapping resource="company.cfg.xml"/>
    <mapping resource="product.cfg.xml"/>
    
-   <mapping class="shchur_pavlo.Hibernate.Country" />
-   <mapping class="shchur_pavlo.Hibernate.Region" />
-   <mapping class="shchur_pavlo.Hibernate.City" />
-   <mapping class="shchur_pavlo.Hibernate.Council" />
-   <mapping class="shchur_pavlo.Hibernate.Policeman" />
+   <mapping class="shchur_pavlo.models.Country" />
+   <mapping class="shchur_pavlo.models.Region" />
+   <mapping class="shchur_pavlo.models.City" />
+   <mapping class="shchur_pavlo.models.Council" />
+   <mapping class="shchur_pavlo.models.Policeman" />
+   <mapping class="shchur_pavlo.models.Citizen" />
+   <mapping class="shchur_pavlo.models.Nationality" />
+   <mapping class="shchur_pavlo.models.Car" />
 
    </session-factory>
 

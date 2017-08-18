@@ -1,6 +1,7 @@
-package shchur_pavlo.Hibernate;
+package shchur_pavlo.models;
 
 import lombok.*;
+import shchur_pavlo.models.City;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,12 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Policeman {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
+public class Policeman extends Model {
 
     private String firstName;
     private String lastName;
