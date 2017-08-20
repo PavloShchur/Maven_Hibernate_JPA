@@ -5,15 +5,17 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "Nationality")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "citizenSet")
 public class Nationality extends Model {
 
     private String typeOfNationality;
