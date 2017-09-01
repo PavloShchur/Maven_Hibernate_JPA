@@ -1,0 +1,49 @@
+<!DOCTYPE <!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        Person
+<script>
+
+    var Person = function (name, age) {
+        this.name = name;
+        this.age = age;
+        this.greeting = function (someName) {
+            console.log(`hello ${someName}, my name is ${this.name}`)
+        }
+    }
+
+    var p = new Person("x", 15);
+    console.log(p);
+    p.greeting("koko");
+
+    var target = {name: 'hasan', age: 15};
+    p.greeting.apply(target, ["everyone"]);
+    p.greeting.call(target, ["everyone", "qwe"]);
+
+    '{"name" : "dfg", "age" : 15}'
+
+    var x = JSON.stringify(target);
+    console.log(x);
+
+    var Developer = function (name, age, skill, company) {
+        Person.apply(this, arguments);
+        this.skill = skill;
+        this.company = company;
+    }
+
+    var oktenVeb = new Developer("oleg", 15, ["sdv0", "sdvb"], "okten");
+    console.log(oktenVeb);
+
+
+</script>
+
+
+</body>
+</html>
