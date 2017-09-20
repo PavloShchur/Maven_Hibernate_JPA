@@ -1,9 +1,7 @@
 package shchur_pavlo.Hibernate;
 
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
 import shchur_pavlo.models.Citizen;
 import shchur_pavlo.models.Nationality;
 
@@ -21,7 +19,7 @@ public class Main {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 //		List<Object[]> citizens = null;
-		List<Object[]> citizens = null;
+		List<Citizen> citizens = null;
 		List<Citizen> citizens1 = new ArrayList<Citizen>();
 
 		try {
@@ -48,8 +46,13 @@ public class Main {
 //					.setParameter("id", 1L);
 //			citizens1 = query.list();
 
-			Citizen citizen = new Citizen("SAVE");
-			session.save(citizen);
+//			Citizen citizen = new Citizen("SAVE");
+//			session.save(citizen);
+			int x[] = {1, 2, 3, 4};
+			Criteria criteria = session.createCriteria(Citizen.class);
+			criteria.add(Restrictions.eq("nameOfCitizen", "First"));
+
+			citizens = criteria.list();
 
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -65,11 +68,15 @@ public class Main {
 //			System.out.println(row[0].toString() + ((Nationality)row[1]).getTypeOfNationality());
 //		}
 
-		System.out.println(citizens1);
+//		System.out.println(citizens1);
 
 //		for (Object obj[] : citizens) {
 //			System.out.println(obj[0].toString() + ((Nationality)obj[1]).getTypeOfNationality());
 //			}
+
+		for (Citizen citizen : citizens) {
+			System.out.println(citizen.toString());
+		}
 	}
 }
 

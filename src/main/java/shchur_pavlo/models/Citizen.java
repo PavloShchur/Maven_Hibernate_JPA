@@ -3,6 +3,9 @@ package shchur_pavlo.models;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +19,12 @@ import java.util.Set;
 @AllArgsConstructor
 public class Citizen extends Model {
 
+    @NotNull(message = "field nameOfCitizen cannot be empty")
     private String nameOfCitizen;
+
+    @Min(1)
+    @Max(100)
+    private int age;
 
     public Citizen(String nameOfCitizen) {
         this.nameOfCitizen = nameOfCitizen;
