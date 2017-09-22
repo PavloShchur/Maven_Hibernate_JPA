@@ -1,11 +1,13 @@
 package shchur_pavlo.models;
 
 import lombok.*;
+import org.hibernate.validator.constraints.CreditCardNumber;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,9 +21,16 @@ import java.util.Set;
 @AllArgsConstructor
 public class Citizen extends Model {
 
+    @Email
+    @Past
+    @Future
+    @NotEmpty
+    @Pattern(regexp = "")
+    @Size(min = 4, max = 16)
     @NotNull(message = "field nameOfCitizen cannot be empty")
     private String nameOfCitizen;
 
+    @CreditCardNumber
     @Min(1)
     @Max(100)
     private int age;
@@ -30,6 +39,7 @@ public class Citizen extends Model {
         this.nameOfCitizen = nameOfCitizen;
     }
 
+    @Valid
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nationality_id", referencedColumnName = "id")
     private Nationality nationality;

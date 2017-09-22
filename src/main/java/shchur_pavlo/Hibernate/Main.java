@@ -5,9 +5,14 @@ import org.hibernate.criterion.Restrictions;
 import shchur_pavlo.models.Citizen;
 import shchur_pavlo.models.Nationality;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class Main {
@@ -16,14 +21,14 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
+//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//		Session session = sessionFactory.openSession();
 //		List<Object[]> citizens = null;
-		List<Citizen> citizens = null;
-		List<Citizen> citizens1 = new ArrayList<Citizen>();
-
-		try {
-			session.beginTransaction();
+//		List<Citizen> citizens = null;
+//		List<Citizen> citizens1 = new ArrayList<Citizen>();
+//
+//		try {
+//			session.beginTransaction();
 
 //			SQLQuery sqlQueryUpdate = (SQLQuery) session.
 //					createSQLQuery("UPDATE Citizen SET nameOfCitizen = :name WHERE id = :id")
@@ -48,21 +53,21 @@ public class Main {
 
 //			Citizen citizen = new Citizen("SAVE");
 //			session.save(citizen);
-			int x[] = {1, 2, 3, 4};
-			Criteria criteria = session.createCriteria(Citizen.class);
-			criteria.add(Restrictions.eq("nameOfCitizen", "First"));
-
-			citizens = criteria.list();
-
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			e.printStackTrace();
-			logger.info(e.toString());
-		} finally {
-			session.close();
-			sessionFactory.close();
-		}
+//			int x[] = {1, 2, 3, 4};
+//			Criteria criteria = session.createCriteria(Citizen.class);
+//			criteria.add(Restrictions.eq("nameOfCitizen", "First"));
+//
+//			citizens = criteria.list();
+//
+//			session.getTransaction().commit();
+//		} catch (Exception e) {
+//			session.getTransaction().rollback();
+//			e.printStackTrace();
+//			logger.info(e.toString());
+//		} finally {
+//			session.close();
+//			sessionFactory.close();
+//		}
 
 //		for(Object[] row : citizens){
 //			System.out.println(row[0].toString() + ((Nationality)row[1]).getTypeOfNationality());
@@ -73,9 +78,30 @@ public class Main {
 //		for (Object obj[] : citizens) {
 //			System.out.println(obj[0].toString() + ((Nationality)obj[1]).getTypeOfNationality());
 //			}
+//
+//		for (Citizen citizen : citizens) {
+//			System.out.println(citizen.toString());
+//		}
 
-		for (Citizen citizen : citizens) {
-			System.out.println(citizen.toString());
+		ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+
+		Validator validator = validatorFactory.getValidator();
+
+		Citizen citizen = new Citizen();
+		citizen.setNameOfCitizen("d");
+
+		Set<ConstraintViolation<Citizen>> validate = validator.validate(citizen);
+
+		for (ConstraintViolation<Citizen> citizenConstraintViolation : validate) {
+
+			StringBuilder stringBuilder = new StringBuilder("property: ");
+			stringBuilder.append(citizenConstraintViolation.getPropertyPath())
+					.append("value: ")
+					.append(citizenConstraintViolation.getInvalidValue())
+					.append("message: ")
+					.append(citizenConstraintViolation.getMessage());
+
+			System.out.println(stringBuilder.toString());
 		}
 	}
 }
